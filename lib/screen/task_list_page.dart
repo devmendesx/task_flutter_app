@@ -149,9 +149,9 @@ class _TaskListPageState extends State<TaskListPage> {
 
   void showSnackBarDoneTask() =>
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content:
-            Text("Well done, task ok!", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
+        content: Text("Well done, task ok!",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.green,
       ));
 
   void showSnackBarForDeletedTask(Task task, int index) =>
