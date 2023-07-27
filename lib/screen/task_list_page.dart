@@ -113,25 +113,11 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
-  void cleanTasks() {
-    setState(() {
-      tasks.clear();
-    });
-  }
-
   TaskListItem buildItem(Task task) => TaskListItem(
         task: task,
         onDelete: onDelete,
+        onDone: onDone,
       );
-
-  void onDelete(Task task) {
-    var taskIndex = tasks.indexOf(task);
-    setState(() {
-      tasks.remove(task);
-    });
-    clearSnackBarsInRow();
-    showSnackBarForDeletedTask(task, taskIndex);
-  }
 
   void dialogDeleteModal() {
     showDialog(
@@ -161,6 +147,13 @@ class _TaskListPageState extends State<TaskListPage> {
 
   void clearSnackBarsInRow() => ScaffoldMessenger.of(context).clearSnackBars();
 
+  void showSnackBarDoneTask() =>
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content:
+            Text("Well done, task ok!", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+      ));
+
   void showSnackBarForDeletedTask(Task task, int index) =>
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content:
@@ -183,8 +176,31 @@ class _TaskListPageState extends State<TaskListPage> {
   void addTask() {
     setState(() {
       tasks.add(Task(description: taskInputController.text));
+      description = "";
     });
     FocusManager.instance.primaryFocus?.unfocus();
     taskInputController.clear();
+  }
+
+  void onDelete(Task task) {
+    var taskIndex = tasks.indexOf(task);
+    setState(() {
+      tasks.remove(task);
+    });
+    clearSnackBarsInRow();
+    showSnackBarForDeletedTask(task, taskIndex);
+  }
+
+  void onDone(Task task) {
+    setState(() {
+      tasks.remove(task);
+    });
+    showSnackBarDoneTask();
+  }
+
+  void cleanTasks() {
+    setState(() {
+      tasks.clear();
+    });
   }
 }
