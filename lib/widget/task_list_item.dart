@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../model/task.dart';
 import '../screen/task_list_page.dart';
 import 'package:intl/intl.dart';
 

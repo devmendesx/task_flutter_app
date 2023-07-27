@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_app/widget/task_list_item.dart';
 
+import '../model/task.dart';
+
 class TaskListPage extends StatefulWidget {
   const TaskListPage({super.key});
 
@@ -185,11 +187,4 @@ class _TaskListPageState extends State<TaskListPage> {
     FocusManager.instance.primaryFocus?.unfocus();
     taskInputController.clear();
   }
-}
-
-class Task {
-  Task({required this.description});
-
-  String description;
-  final DateTime date = DateTime.now();
 }
